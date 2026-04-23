@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Syne:wght@500;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  margin: 0;
+  min-height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
+}
+
+body {
+  font-family: 'Instrument Sans', sans-serif;
+  background:
+    radial-gradient(circle at 8% 14%, rgba(233, 110, 54, 0.16), transparent 38%),
+    radial-gradient(circle at 89% 84%, rgba(55, 122, 255, 0.2), transparent 42%),
+    #090909;
+  color: #ececec;
+}
+
+.font-display {
+  font-family: 'Syne', sans-serif;
+}
+
+.page-shell {
+  position: relative;
+  overflow: clip;
+}
+
+.page-shell::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 58px 58px;
+  mask-image: radial-gradient(circle at center, black 35%, transparent 85%);
+  opacity: 0.5;
+  z-index: -1;
+}
+
+.noise-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 3px 3px;
+  opacity: 0.35;
+}
+
+.hero-title {
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.section-shell {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.section-space {
+  padding-top: 4.5rem;
+  padding-bottom: 4.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-shell {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  .section-space {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+.marquee {
+  display: inline-block;
+  min-width: 100%;
+  padding-left: 100%;
+  animation: slide-loop 16s linear infinite;
+}
+
+.nav-link {
+  position: relative;
+  padding-bottom: 6px;
+  transition: color 0.3s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background: #ffffff;
+  transition: width 0.3s ease;
+}
+
+.nav-link.is-active::after {
+  width: 100%;
+}
+
+.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-enabled .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  will-change: opacity, transform;
+}
+
+.reveal-enabled .reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.fade-slide-enter-from,
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.typewriter-caret {
+  display: inline-block;
+  width: 0.7ch;
+  height: 1em;
+  margin-left: 0.35rem;
+  background: rgba(255, 255, 255, 0.75);
+  animation: caret-blink 0.9s steps(1) infinite;
+}
+
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+@keyframes slide-loop {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@media (max-width: 768px) {
+  .page-shell::before {
+    background-size: 42px 42px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal-enabled .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
