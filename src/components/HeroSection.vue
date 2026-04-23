@@ -1,72 +1,92 @@
 <template>
-  <section class="section-space relative overflow-hidden">
-    <div class="noise-layer"></div>
-    <div class="section-shell grid gap-14 md:grid-cols-[1.15fr_0.85fr] md:gap-12">
-      <div>
-        <p class="mb-4 text-xs uppercase tracking-[0.22em] text-white/45">Hero banner</p>
-        <h1 class="hero-title text-[11vw] leading-[0.95] text-white md:text-[6.4rem]">
-          Tien
-          <br />
-          <span class="text-white/60">Le</span>
-        </h1>
-        <p class="mt-4 text-xs uppercase tracking-[0.24em] text-white/55">
-          <span class="typewriter">{{ displayText }}</span>
-          <span class="typewriter-caret" aria-hidden="true"></span>
-        </p>
-        <p class="mt-6 max-w-2xl text-base leading-relaxed text-white/70 md:text-lg">
-          DevOps engineer in training, tap trung vao automation, IaC, va container orchestration voi Docker, GitHub, Ansible, Kubernetes, Terraform.
-        </p>
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a
-            href="#projects"
-            class="rounded-full bg-white px-5 py-2.5 text-xs uppercase tracking-[0.2em] text-black transition hover:bg-gray-200"
-          >
-            View projects
-          </a>
-          <a
-            href="#contact"
-            class="rounded-full border border-white/20 px-5 py-2.5 text-xs uppercase tracking-[0.2em] text-white/80 transition hover:border-white/50"
-          >
-            Contact me
-          </a>
-        </div>
-        <div class="mt-8 grid max-w-xl grid-cols-2 gap-4 text-xs uppercase tracking-[0.18em] text-white/55">
-          <div class="rounded-2xl border border-white/10 bg-black/20 p-4">
-            <p class="text-white/40">Core stack</p>
-            <p class="mt-2 text-sm text-white">Docker + K8s</p>
-          </div>
-          <div class="rounded-2xl border border-white/10 bg-black/20 p-4">
-            <p class="text-white/40">Automation</p>
-            <p class="mt-2 text-sm text-white">Ansible + Terraform</p>
-          </div>
-        </div>
-      </div>
+  <section id="hero" class="relative min-h-[90vh] flex items-center overflow-hidden section-space">
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute -left-32 top-1/4 h-96 w-96 animate-float opacity-30 blur-[100px] [background:radial-gradient(circle_at_center,rgba(233,110,54,0.5)_0%,transparent_70%)]" />
+      <div class="absolute -right-32 top-1/3 h-80 w-80 animate-float-delayed opacity-20 blur-[100px] [background:radial-gradient(circle_at_center,rgba(55,122,255,0.5)_0%,transparent_70%)]" />
+      <div class="absolute bottom-32 left-1/4 h-64 w-64 animate-float opacity-15 blur-[100px] [background:radial-gradient(circle_at_center,rgba(139,92,246,0.5)_0%,transparent_70%)]" />
+    </div>
 
-      <div class="md:pt-8">
-        <div class="rounded-3xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm">
-          <p class="text-xs uppercase tracking-[0.18em] text-white/45">Currently</p>
-          <p class="mt-4 font-display text-2xl leading-tight text-white">
-            Building infra for high-traffic products and internal automation.
+    <div class="section-shell relative z-10">
+      <div class="grid gap-16 lg:grid-cols-2 lg:gap-12 lg:items-center">
+        <div class="space-y-8">
+          <div class="inline-flex items-center gap-2 rounded-full border border-accent-orange/30 bg-accent-orange/10 px-4 py-2 text-xs uppercase tracking-wider text-accent-orange">
+            <span class="relative flex h-2 w-2">
+              <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-orange opacity-75"></span>
+              <span class="relative inline-flex h-2 w-2 rounded-full bg-accent-orange"></span>
+            </span>
+            Available for new opportunities
+          </div>
+
+          <div>
+            <p class="mb-3 text-xs uppercase tracking-[0.22em] text-accent-orange/70">Hello, I'm</p>
+            <h1 class="hero-title text-[clamp(3rem,10vw,6rem)] leading-[0.95]">
+              Tien <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-orange via-accent-blue to-accent-purple animate-gradient-shift bg-300%">Le</span>
+            </h1>
+            <div class="mt-4 flex items-center gap-3">
+              <p class="text-lg font-mono text-white/50 md:text-xl">
+                <span class="typing-text">{{ displayText }}</span>
+                <span class="typing-caret" />
+              </p>
+            </div>
+          </div>
+
+          <p class="max-w-2xl text-lg leading-relaxed text-white/65 md:text-xl">
+            DevOps engineer focused on automation, infrastructure as code, and container orchestration.
+            Building reliable systems with <span class="text-accent-orange">Docker</span>, <span class="text-accent-blue">Kubernetes</span>,
+            <span class="text-accent-purple">Terraform</span>, and <span class="text-accent-teal">GitHub Actions</span>.
           </p>
-          <div class="mt-8 space-y-4 text-sm text-white/65">
-            <div class="flex items-center justify-between border-b border-white/10 pb-3">
-              <span>Container platform</span>
-              <span class="text-white/35">Docker / Kubernetes</span>
-            </div>
-            <div class="flex items-center justify-between border-b border-white/10 pb-3">
-              <span>Infrastructure as Code</span>
-              <span class="text-white/35">Terraform</span>
-            </div>
-            <div class="flex items-center justify-between">
-              <span>Config automation</span>
-              <span class="text-white/35">Ansible / GitHub</span>
+
+          <div class="flex flex-wrap gap-4 pt-2">
+            <a href="#projects" class="btn-primary">
+              <span>View projects</span>
+            </a>
+            <a href="#contact" class="btn-secondary">
+              Get in touch
+            </a>
+            <a href="/resume.pdf" class="group inline-flex items-center gap-2 text-sm text-white/60 transition-colors hover:text-accent-blue" target="_blank">
+              <Download class="h-4 w-4 transition-transform group-hover:translate-y-1" />
+              <span>Resume</span>
+            </a>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4 pt-4 sm:grid-cols-3">
+            <div v-for="stat in stats" :key="stat.label" class="card-hover rounded-2xl border border-white/10 bg-white/[0.02] p-5 backdrop-blur-sm">
+              <p class="text-2xl font-display font-bold text-white">{{ stat.value }}</p>
+              <p class="mt-1 text-xs uppercase tracking-wider text-white/50">{{ stat.label }}</p>
             </div>
           </div>
         </div>
 
-        <div class="mt-4 flex items-center gap-3 text-xs uppercase tracking-[0.18em] text-white/40">
-          <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
-          Open to new opportunities in 2026
+        <div class="relative hidden lg:block">
+          <div class="relative aspect-square max-w-lg mx-auto">
+            <div class="absolute inset-0 animate-float">
+              <div class="glass-card h-full w-full p-8 flex items-center justify-center">
+                <div class="text-center">
+                  <div class="mb-6 text-6xl">🚀</div>
+                  <p class="font-display text-xl text-white/70">Infrastructure</p>
+                  <p class="text-sm text-white/50 mt-2">as Code</p>
+                </div>
+              </div>
+            </div>
+            <div class="absolute -right-8 top-1/4 animate-float-delayed">
+              <div class="glass-card px-4 py-2 flex items-center gap-2">
+                <Box class="h-5 w-5 text-accent-blue" />
+                <span class="text-sm font-mono text-white">Docker</span>
+              </div>
+            </div>
+            <div class="absolute -left-8 top-1/3 animate-float">
+              <div class="glass-card px-4 py-2 flex items-center gap-2">
+                <Cloud class="h-5 w-5 text-accent-orange" />
+                <span class="text-sm font-mono text-white">K8s</span>
+              </div>
+            </div>
+            <div class="absolute right-12 bottom-12 animate-float-delayed">
+              <div class="glass-card px-4 py-2 flex items-center gap-2">
+                <Terminal class="h-5 w-5 text-accent-purple" />
+                <span class="text-sm font-mono text-white">Bash</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -75,6 +95,7 @@
 
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { Download, Box, Cloud, Terminal } from 'lucide-vue-next'
 
 const roles = [
   'DevOps Engineer',
@@ -89,10 +110,10 @@ const roleIndex = ref(0)
 let isDeleting = false
 let typingTimer
 
-const typeDelay = 90
-const deleteDelay = 55
-const holdDelay = 1400
-const resetDelay = 350
+const typeDelay = 80
+const deleteDelay = 50
+const holdDelay = 2000
+const resetDelay = 500
 
 const tick = () => {
   const current = roles[roleIndex.value] || ''
@@ -118,6 +139,13 @@ const tick = () => {
   typingTimer = window.setTimeout(tick, deleteDelay)
 }
 
+const stats = [
+  { value: '2+', label: 'Years Experience' },
+  { value: '15+', label: 'Projects Completed' },
+  { value: '99%', label: 'Uptime Achieved' },
+  { value: '50%', label: 'Faster Deploys' },
+]
+
 onMounted(() => {
   tick()
 })
@@ -128,3 +156,20 @@ onBeforeUnmount(() => {
   }
 })
 </script>
+
+<style scoped>
+.typing-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.2em;
+  margin-left: 2px;
+  background: linear-gradient(180deg, #e96e36, #377aff);
+  animation: blink 1s step-end infinite;
+  vertical-align: text-bottom;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+</style>
