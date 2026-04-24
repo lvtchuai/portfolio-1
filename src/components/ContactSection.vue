@@ -167,16 +167,8 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, onMounted } from 'vue'
+import { ref, reactive } from 'vue'
 import { Mail, MapPin, Github, Linkedin, CheckCircle, AlertCircle } from 'lucide-vue-next'
-
-// Load EmailJS script
-onMounted(() => {
-  const script = document.createElement('script')
-  script.src = 'https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js'
-  script.async = true
-  document.head.appendChild(script)
-})
 
 const socialLinks = [
   { name: 'GitHub', url: 'https://github.com/lvtchuai', icon: Github },
@@ -201,10 +193,8 @@ const isSubmitting = ref(false)
 const formStatus = ref('idle')
 const errorMessage = ref('')
 
-// Get credentials from .env file
-const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
-const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
-const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+// Get Web3Forms access key from environment
+const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
 
 const validateForm = () => {
   let isValid = true
@@ -245,10 +235,10 @@ const validateForm = () => {
   return isValid
 }
 
-const sendEmail = async (formData) => {
-  // Check if EmailJS is configured
-  if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
-    console.warn('EmailJS not configured. Using demo mode.')
+const sendForm = async (formData) => {
+  // Check if Web3Forms is configured
+  if (!WEB3FORMS_ACCESS_KEY) {
+    console.warn('Web3Forms not configured. Using demo mode.')
     // Demo mode - simulates sending
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -257,28 +247,33 @@ const sendEmail = async (formData) => {
     })
   }
 
-  // Check if emailjs is loaded
-  if (typeof window.emailjs === 'undefined') {
-    return { success: false, error: 'Email service is loading. Please try again.' }
-  }
-
   try {
-    const result = await window.emailjs.send(
-      EMAILJS_SERVICE_ID,
-      EMAILJS_TEMPLATE_ID,
-      {
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_ACCESS_KEY,
         from_name: formData.name,
         from_email: formData.email,
         subject: formData.subject,
         message: formData.message,
-        reply_to: formData.email,
-      },
-      EMAILJS_PUBLIC_KEY
-    )
-    return { success: true, result }
+        // Optional: add custom fields
+        // hp_name: '', // Honeypot field (leave empty)
+      }),
+    })
+
+    const result = await response.json()
+
+    if (response.ok && result.success) {
+      return { success: true, result }
+    } else {
+      return { success: false, error: result.message || 'Failed to send message' }
+    }
   } catch (error) {
-    console.error('EmailJS Error:', error)
-    return { success: false, error: error.text || 'Failed to send email' }
+    console.error('Web3Forms Error:', error)
+    return { success: false, error: error.message || 'Network error occurred' }
   }
 }
 
@@ -292,7 +287,7 @@ const handleSubmit = async () => {
   errorMessage.value = ''
 
   try {
-    const result = await sendEmail({
+    const result = await sendForm({
       name: form.name,
       email: form.email,
       subject: form.subject,

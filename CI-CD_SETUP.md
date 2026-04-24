@@ -15,25 +15,23 @@ This portfolio uses GitHub Actions to automatically deploy to AWS S3 + CloudFron
 
 **Never commit `.env` file to GitHub!** Instead, use GitHub Secrets.
 
-### Step 1: Get Your EmailJS Credentials
+### Step 1: Get Your Web3Forms API Key
 
-1. Log into [emailjs.com](https://www.emailjs.com/)
-2. Go to **Email Services** → copy your **Service ID**
-3. Go to **Email Templates** → copy your **Template ID**
-4. Go to **Integration** → **EmailJS SDK** → copy **Public Key**
+1. Go to [web3forms.com](https://www.web3forms.com/)
+2. Sign up for a free account (100 submissions/month free)
+3. Go to **Dashboard** → **API Keys**
+4. Copy your **Access Key** (starts with `wf_`)
 
 ### Step 2: Add Secrets to GitHub
 
 1. Go to your GitHub repository
 2. Click **Settings** → **Secrets and variables** → **Actions**
 3. Click **New repository secret**
-4. Add these 3 secrets:
+4. Add these secrets:
 
 | Secret Name | Value |
 |-------------|-------|
-| `VITE_EMAILJS_SERVICE_ID` | `service_xxxxxxxxxxxxx` |
-| `VITE_EMAILJS_TEMPLATE_ID` | `template_xxxxxxxxxxxxx` |
-| `VITE_EMAILJS_PUBLIC_KEY` | `user_xxxxxxxxxxxxx` |
+| `VITE_WEB3FORMS_ACCESS_KEY` | `wf_xxxxxxxxxxxxx` |
 
 **Already configured AWS secrets (from your existing workflow):**
 - `AWS_ACCESS_KEY_ID`
@@ -45,9 +43,8 @@ This portfolio uses GitHub Actions to automatically deploy to AWS S3 + CloudFron
 
 Make sure your local `.env` file (not committed) has:
 ```env
-VITE_EMAILJS_SERVICE_ID=service_your_id
-VITE_EMAILJS_TEMPLATE_ID=template_your_id
-VITE_EMAILJS_PUBLIC_KEY=user_your_key
+VITE_WEB3FORMS_ACCESS_KEY=wf_your_access_key
+CONTACT_EMAIL=lvtf07@gmail.com
 ```
 
 ## 🧪 Testing Locally
@@ -102,9 +99,10 @@ Invalidate CloudFront cache
 - Ensure all dependencies are in `package.json`
 
 ### Contact form not sending emails
-- Verify EmailJS credentials in GitHub Secrets
+- Verify Web3Forms access key in GitHub Secrets
 - Check browser console for errors
 - Test with `npm run dev` first locally
+- Ensure your domain is added to Web3Forms allowed domains (in dashboard)
 
 ### S3 sync fails
 - Verify `AWS_S3_BUCKET` secret is correct
@@ -117,3 +115,4 @@ Invalidate CloudFront cache
 - `tailwind.config.js` - Tailwind CSS configuration
 - `vite.config.js` - Vite build configuration
 - `.env.example` - Template for environment variables
+- `src/components/ContactSection.vue` - Contact form using Web3Forms
