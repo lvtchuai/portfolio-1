@@ -7,7 +7,7 @@
     <div class="sticky top-0 z-50 border-b border-white/10 bg-black/50 backdrop-blur-xl">
       <header class="mx-auto flex w-full max-w-[1280px] items-center justify-between px-6 py-5 md:px-10">
         <a href="#hero" class="font-display text-sm tracking-[0.26em] text-white hover:text-accent-orange transition-colors duration-300">
-          Tien<span class="text-accent-orange">.</span>Le
+          LOVITI<span class="text-accent-orange">.</span>
         </a>
         <nav class="hidden items-center gap-8 text-xs uppercase tracking-[0.18em] md:flex">
           <a
